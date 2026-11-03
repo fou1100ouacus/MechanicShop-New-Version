@@ -1,0 +1,52 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+*.dll
+*.exe
+*.pdb
+*.cache
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## ASP.NET
+appsettings.Development.json
+appsettings.*.local.json
+*.log
+
+## Node / Frontend (if you have a Client with npm/yarn)
+node_modules/
+dist/
+build/
+.npm
+*.tgz
+.yarn-integrity
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+## IDE & OS
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+## Test & Coverage
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+## Other
+*.nupkg
+*.snupkg
+packages/

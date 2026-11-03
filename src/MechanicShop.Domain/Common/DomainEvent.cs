@@ -1,4 +1,4 @@
-// using MediatR;
+using MediatR;
 
 // <summary>
 // Base class for domain events.

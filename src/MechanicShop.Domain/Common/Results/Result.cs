@@ -4,6 +4,8 @@ using MechanicShop.Domain.Common.Results.Abstractions;
 
 namespace MechanicShop.Domain.Common.Results;
 
+// this non-generic Result class is used to represent a result 
+// that does not have a value, but can still be successful or contain errors.
 public static class Result
 {
  // Static properties representing different result types.
@@ -12,15 +14,22 @@ public static class Result
     public static Deleted Deleted => default;
     public static Updated Updated => default;
 }
-
+// this generic Result class is used to represent a result that has a value of type TValue,
+// and can be either successful or contain errors.  
 public sealed class Result<TValue> : IResult<TValue>
-{
+{// private fields to hold the value and errors.
     private readonly TValue? _value = default;
 
     private readonly List<Error>? _errors = null;
 
     public bool IsSuccess { get; }
 
+// constructor for the Result class that takes a value,
+//  a list of errors, and a success flag.
+// the constructor is marked with the JsonConstructor attribute to ==> indicate that it should be used by the JSON serializer.
+// it is also marked as obsolete to indicate that it should not be used directly, but only by the serializer.
+// if the success flag is true, the value is set and the errors list is empty.
+// if the success flag is false, the errors list must be provided and cannot be empty.
     [JsonConstructor]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [Obsolete("For serializer only.", true)]
@@ -62,6 +71,8 @@ public sealed class Result<TValue> : IResult<TValue>
         IsSuccess = false;
     }
 
+// private constructor for the Result class that takes a value 
+// and sets the success flag to true.
     private Result(TValue value)
     {
         if (value is null)
@@ -95,6 +106,10 @@ public sealed class Result<TValue> : IResult<TValue>
         => new(errors);
 }
 
+// record structs representing different result types.
+//  the record mean that they are immutable and can be compared by value.
+//  the struct means that they are value types and will be allocated on the stack.
+// 
 public readonly record struct Success;
 public readonly record struct Created;
 public readonly record struct Deleted;
