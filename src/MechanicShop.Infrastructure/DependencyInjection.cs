@@ -1,9 +1,8 @@
 
 using MechanicShop.Infrastructure.Data;
-// using MechanicShop.Infrastructure.Data.Interceptors;
+using MechanicShop.Infrastructure.Data.Interceptors;
 using MechanicShop.Infrastructure.Identity;
 using MediatR;
-// using MechanicShop.Infrastructure.Identity.Policies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +12,8 @@ using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Configuration;// iConfiguration
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MechanicShop.Application.Common.Interfaces;
+using MechanicShop.Infrastructure.Identity.Policies;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -34,7 +35,8 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         ArgumentNullException.ThrowIfNull(connectionString);
-       // services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+        services.AddHttpContextAccessor();
+        services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
 
         services.AddDbContext<AppDbContext>((sp, options) =>
         {
@@ -42,16 +44,16 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString);
         });
 
-        // services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
+        services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
 
-        // services.AddScoped<ApplicationDbContextInitialiser>();
+   //   services.AddScoped<ApplicationDbContextInitialiser>();
 
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(options =>
-        {
+        })
+        .AddJwtBearer(options =>{
             var jwtSettings = configuration.GetSection("JwtSettings");
 
             options.TokenValidationParameters = new TokenValidationParameters
@@ -81,24 +83,28 @@ public static class DependencyInjection
         })
         .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<AppDbContext>();
+// who can access a work order?  The labor assigned to it, or a manager.  This is enforced by the LaborAssignedHandler, which is registered below.  The handler checks if the user is assigned to the work order, or if they are a manager.  If neither, access is denied.  The handler is registered as a scoped service, and the requirement is added to the authorization policy.
 
-     //   services.AddScoped<IAuthorizationHandler, LaborAssignedHandler>();
+ 
+      services.AddScoped<IAuthorizationHandler, LaborAssignedHandler>();
 
-    //     services.AddAuthorizationBuilder()
-    //           .AddPolicy("ManagerOnly", policy => policy.RequireRole("Manager"))
-    //           .AddPolicy("SelfScopedWorkOrderAccess", policy =>
-    //             policy.Requirements.Add(new LaborAssignedRequirement()));
+        services.AddAuthorizationBuilder()
+              .AddPolicy("ManagerOnly", policy => policy.RequireRole("Manager"))
+              .AddPolicy("SelfScopedWorkOrderAccess", policy =>
+                policy.Requirements.Add(new LaborAssignedRequirement()));
 
-    //    services.AddTransient<IIdentityService, IdentityService>();
+       services.AddTransient<IIdentityService, IdentityService>();
 
         services.AddHybridCache(options => options.DefaultEntryOptions = new HybridCacheEntryOptions
         {
             Expiration = TimeSpan.FromMinutes(10), // L2, L3
             LocalCacheExpiration = TimeSpan.FromSeconds(30), // L1
         });
+   
+   
      //   services.AddScoped<IWorkOrderPolicy, WorkOrderPolicy>();
 
-    //    services.AddScoped<ITokenProvider, TokenProvider>();
+       services.AddScoped<ITokenProvider, TokenProvider>();
 
     //    services.AddScoped<IInvoicePdfGenerator, InvoicePdfGenerator>();
 //

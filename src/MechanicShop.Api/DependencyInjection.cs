@@ -1,11 +1,39 @@
 
+using MechanicShop.Api.Services;
+using MechanicShop.Application.Common.Interfaces;
+using MechanicShop.Infrastructure;
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
-  public static IServiceCollection AddIdentityInfrastructure(this IServiceCollection services)
+    
+    public static IServiceCollection AddPresentation(this IServiceCollection services, IConfiguration configuration)
     {
-      //  services.AddScoped<IUser, CurrentUser>();
+      //  services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
+
+      //  QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
+            services.AddIdentityInfrastructure();
+
+        // services.AddCustomProblemDetails()
+        //         .AddCustomApiVersioning()
+        //         .AddApiDocumentation()
+        //         .AddExceptionHandling()
+        //         .AddControllerWithJsonConfiguration()
+        //         .AddValidation()
+        //         .AddConfiguredCors(configuration)
+        //         .AddIdentityInfrastructure()
+        //         .AddAppRateLimiting()
+        //         .AddAppOutputCaching()
+        //         .AddAppOpenTelememrty()
+        //         .AddSignalR();
+
+        return services;
+    }
+    public static IServiceCollection AddIdentityInfrastructure(this IServiceCollection services)
+    {
+       services.AddScoped<IUser, CurrentUser>();
         services.AddHttpContextAccessor();
         return services;
     }
