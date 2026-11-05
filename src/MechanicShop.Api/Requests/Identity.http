@@ -1,0 +1,31 @@
+@baseUrl = https://localhost:7XXX
+@accessToken = 
+@refreshToken = 
+
+############################################
+### 1. Generate Token (Login)
+############################################
+POST {{baseUrl}}/identity/token/generate
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "YourPassword123!"
+}
+
+############################################
+### 2. Refresh Token
+############################################
+POST {{baseUrl}}/identity/token/refresh-token
+Content-Type: application/json
+
+{
+  "accessToken": "{{accessToken}}",
+  "refreshToken": "{{refreshToken}}"
+}
+
+############################################
+### 3. Get Current User Claims (Protected)
+############################################
+GET {{baseUrl}}/identity/current-user/claims
+Authorization: Bearer {{accessToken}}
