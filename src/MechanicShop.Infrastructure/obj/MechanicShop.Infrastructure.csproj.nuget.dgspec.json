@@ -769,6 +769,10 @@
             "Microsoft.Extensions.Caching.Hybrid": {
               "target": "Package",
               "version": "[10.11.0, )"
+            },
+            "System.Security.Cryptography.Pkcs": {
+              "target": "Package",
+              "version": "[9.0.21, )"
             }
           },
           "imports": [
