@@ -21,7 +21,7 @@ internal sealed class BearerSecuritySchemeTransformer
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
                 Name = "Authorization",
-                Description = "JWT Authorization header using Bearer scheme."
+                Description = "Paste only the accessToken value here (without quotes or the 'Bearer ' prefix). Swagger UI adds the Bearer prefix automatically. Do not use the refreshToken."
             };
 
         return Task.CompletedTask;

@@ -11,7 +11,7 @@ namespace MechanicShop.Infrastructure.Data;
 public class AppDbContext(DbContextOptions<AppDbContext> options, IMediator mediator) : IdentityDbContext<AppUser>(options), IAppDbContext
 {
       public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
-          public DbSet<Employee> Employees => Set<Employee>();
+      public DbSet<Employee> Employees => Set<Employee>();
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
