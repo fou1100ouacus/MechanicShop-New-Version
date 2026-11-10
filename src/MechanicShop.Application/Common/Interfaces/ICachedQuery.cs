@@ -10,3 +10,4 @@ public interface ICachedQuery
 }
 
 public interface ICachedQuery<TResponse> : IRequest<TResponse>, ICachedQuery;
+//public sealed record GetCustomersQuery : ICachedQuery<Result<List<CustomerDto>>>

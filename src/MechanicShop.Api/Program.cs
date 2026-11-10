@@ -47,5 +47,5 @@ app.MapControllers();
 
 
 app.Run();
-//  dotnet ef migrations add InitialCreate --startup-project ../MechanicShop.Api            
+//  dotnet ef migrations add Customer --startup-project ../MechanicShop.Api            
 //dotnet ef database update --startup-project ../MechanicShop.Api

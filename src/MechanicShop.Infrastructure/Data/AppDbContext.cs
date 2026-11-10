@@ -1,6 +1,9 @@
 using MechanicShop.Application.Common.Interfaces;
 using MechanicShop.Domain.Common;
 using MechanicShop.Domain.Identity;
+using MechanicShop.Domain.Customers;
+using MechanicShop.Domain.Customers.Vehicles;
+
 using MechanicShop.Infrastructure.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -12,6 +15,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, IMediator medi
 {
       public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
       public DbSet<Employee> Employees => Set<Employee>();
+      public DbSet<Customer> Customers => Set<Customer>();
+      public DbSet<Vehicle> Vehicles => Set<Vehicle>();
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

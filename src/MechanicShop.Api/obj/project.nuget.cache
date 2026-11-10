@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+huO1DyGKBM=",
+  "dgSpecHash": "1Bu2au16M0s=",
   "success": true,
   "projectFilePath": "D:\\Programming\\FullStackProject\\Mechanic Shop\\src\\MechanicShop.Api\\MechanicShop.Api.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\mediatr\\14.2.0\\mediatr.14.2.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.14\\microsoft.aspnetcore.authentication.jwtbearer.10.0.14.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.components.dataannotations.validation\\3.2.0-rc1.20223.4\\microsoft.aspnetcore.components.dataannotations.validation.3.2.0-rc1.20223.4.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\10.0.14\\microsoft.aspnetcore.components.webassembly.10.0.14.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.server\\10.0.14\\microsoft.aspnetcore.components.webassembly.server.10.0.14.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\10.0.14\\microsoft.aspnetcore.identity.entityframeworkcore.10.0.14.nupkg.sha512",
